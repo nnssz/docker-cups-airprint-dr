@@ -13,7 +13,7 @@ echo $URI
 /usr/share/cups/model/ and restart cupsd. s will install it in /etc/cups/ppd and you can choose it via 
 the web interface. (http://192.168.1.1:631). 
 # 原始队列，不含 PPD 文件或过滤器时：lpadmin -p SHARED_PRINTER -m raw  
-
+# -D 添加对打印机的描述，docker ... -e CUPS_LPADMIN_PRINTER1="lpadmin -p Epson-RX520 -D 'Epson Stylus Photo RX520' -m 'gutenprint.5.3://escp2-rx620/expert' -o PageSize=A4 -v smb://user:pass@host/Epson-RX520" ...
 # 可通过 -P 命令行开关使用完整路径。
 lpadmin -p HP136w -E -v "$URI" -P /usr/share/ppd/uld-hp/HP_Laser_MFP_13x_Series.ppd
 
