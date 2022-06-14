@@ -1,0 +1,7 @@
+#! /bin/
+
+URI=$(lpinfo -v | grep usb |awk '{ print $2 }')
+echo $URI
+sudo lpadmin -p HP136w -v "$URI" -E -P /usr/share/ppd/uld-hp/HP_Laser_MFP_13x_Series.ppd
+
+exit 0
