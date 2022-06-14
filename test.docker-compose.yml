@@ -1,0 +1,37 @@
+version: "3"
+services:
+  cups:
+    container_name: cups
+    image: drpsychick/airprint-bridge
+    restart: unless-stopped
+    hostname: cups.home
+    privileged: true
+    networks:
+      localnet:
+        ipv4_address: $CUPSSERVER_LOCALNET_IP
+          #security_opt:
+          #  - no-new-privileges:true
+    ports:
+      - "137:137/udp"
+      - "139:139/tcp"
+      - "445:445/tcp"
+      - "631:631/tcp"
+      - "5353:5353/udp"
+    environment:
+      TZ: $TZ
+      CUPS_ADMIN_USER: $CUPS_USERNAME
+      CUPS_ADMIN_PASSWORD: $CUPS_PASSWORD
+      CUPS_REMOTE_ADMIN: "yes"
+      CUPS_WEBINTERFACE: "yes"
+      CUPS_SHARE_PRINTERS: "yes"
+      CUPS_ACCESS_LOGLEVEL: "access"
+      CUPS_LOGLEVEL: "debug"
+      CUPS_LPADMIN_PRINTER1: "lpadmin -p <printer_model> -D '<printer_name>' -m '<printer_driver>' -v 'usb://<interface_path>'"
+      CUPS_LPADMIN_PRINTER1_ENABLE: "cupsenable <printer_name>"
+      CUPS_LPADMIN_PRINTER1_ACCEPT: "cupsaccept <printer_name>"
+    volumes:
+      - $DOCKERDIR/cups/config:/etc/cups
+      - $DOCKERDIR/cups/services:/etc/avahi/services
+      - /var/run/dbus:/var/run/dbus
+      - /dev/bus/usb:/dev/bus/usb
+      #- /etc/udev:/etc/udev
