@@ -5,7 +5,7 @@ echo $URI
 # padmin 实用程序加上 -p queue_name可创建新队列。-E 开关与 -p 一起使用可启用并接受打印机上的任务。
 # -v 指定设备 URI， 
 # -m 指定型号或要使用的 PPD 文件或型号。
-# -m 且指定PPD 文件时，请只使用文件名，而不要用完整路径（例如，应该使用 pxlmono.ppd 而不是 /usr/share/ppd/cupsfilters/pxlmono.ppd）。
+# -m 指定PPD 文件时，请只使用文件名，而不要用完整路径（例如，应该使用 pxlmono.ppd 而不是 /usr/share/ppd/cupsfilters/pxlmono.ppd）。
 # lpadmin -p Test_Printer -E -v "ipp://10.0.1.3/ipp/print" -m pxlmono.ppd  
 # 打印机支持免驱动打印队列（Apple AirPrint 或 IPP Everywhere）时 : lpadmin -p AirPrint -E -v "ipp://10.0.1.25/ipp/print" -m everywhere 
 # 到2021年时，许多新款打印机支持免驱打印设置。如上述第二个例子一样指定 -m everywhere，即可定义打印机，并通过查询网络上的打印机在 /etc/cups/ppd/ 中生成 .ppd 文件。
